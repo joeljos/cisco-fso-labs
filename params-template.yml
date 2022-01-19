@@ -1,0 +1,10 @@
+lpass-username:
+lpass-password:
+branch:
+git-uri: git@github.com:devops-ontap/cisco-fso-labs.git
+Username:
+email:
+private_key: |
+image-repo-name:
+registry-username:
+registry-password:
