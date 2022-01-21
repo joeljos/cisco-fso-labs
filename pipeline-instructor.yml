@@ -1,0 +1,373 @@
+jobs:
+- name: lab-prep
+  plan:
+  - get: lpass-res
+    trigger: true
+    version: every
+  - config:
+      image_resource:
+        name: ""
+        source:
+          repository: alpine
+        type: docker-image
+      inputs:
+      - name: lpass-res
+      outputs:
+      - name: lpass-out
+      platform: linux
+      run:
+        args:
+        - -cx
+        - |
+          cp "lpass-res/item" "lpass-out/item.json"
+        path: /bin/sh
+    task: print-item
+
+  - get: git-resource
+    trigger: true
+  - config:
+      image_resource:
+        name: ""
+        source:
+          repository: sconrod/python-aws
+          tag: v2
+        type: docker-image
+      inputs:
+      - name: git-resource
+      - name: lpass-out
+      outputs:
+      - name: gen-aws-cred
+      platform: linux
+      run:
+        path: /bin/sh
+        args:
+        - -cx
+        - |
+          mkdir ~/.aws
+          cp "git-resource/sed.sh" "gen-aws-cred"
+          cp "lpass-out/item.json" "gen-aws-cred/item.json"
+          cp "git-resource/convert.sh" "gen-aws-cred/convert.sh"
+          cp "git-resource/con-cred-json-csv.py" "gen-aws-cred/con-cred-json-csv.py"
+          cd gen-aws-cred
+          chmod a+x convert.sh
+          ./convert.sh
+          export AWS_PAGER=""
+          aws configure import --csv file://item.cln.csv
+          aws configure set default.region us-east-2
+          export AWS_PAGER=""
+          aws sts get-caller-identity --query Account --output text
+    task: gen-lastpass-cred
+
+- name: deploy-aws-env
+  plan:
+    - get: lpass-res
+      version: every
+    - config:
+        image_resource:
+          name: ""
+          source:
+            repository: alpine
+          type: docker-image
+        inputs:
+          - name: lpass-res
+        outputs:
+          - name: lpass-out
+        platform: linux
+        run:
+          args:
+            - -cx
+            - |
+              cp "lpass-res/item" "lpass-out/item.json"
+          path: /bin/sh
+      task: print-item
+
+    - get: git-resource
+    - config:
+        image_resource:
+          name: ""
+          source:
+            repository: sconrod/python-aws
+            tag: v2
+          type: docker-image
+        inputs:
+          - name: git-resource
+          - name: lpass-out
+        outputs:
+          - name: gen-aws-cred
+        platform: linux
+        run:
+          path: /bin/sh
+          args:
+            - -cx
+            - |
+              mkdir ~/.aws
+              cp "lpass-out/item.json" "git-resource/item.json"
+              cd git-resource
+              chmod a+x convert.sh
+              ./convert.sh
+              export AWS_PAGER=""
+              aws configure import --csv file://item.cln.csv
+              aws configure set default.region us-east-2
+              export AWS_PAGER=""
+              aws sts get-caller-identity --query Account --output text
+              export AWS_PAGER=""
+              aws ec2 describe-regions
+              chmod a+x aws_key.sh
+              chmod a+x aws_deploy.sh
+              ./aws_key.sh
+              ./aws_deploy.sh
+      task: build-vpc
+
+- name: deploy-csr1000v
+  plan:
+    - get: lpass-res
+      version: every
+    - config:
+        image_resource:
+          name: ""
+          source:
+            repository: alpine
+          type: docker-image
+        inputs:
+          - name: lpass-res
+        outputs:
+          - name: lpass-out
+        platform: linux
+        run:
+          args:
+            - -cx
+            - |
+              cp "lpass-res/item" "lpass-out/item.json"
+          path: /bin/sh
+      task: print-item
+
+    - get: git-resource
+    - config:
+        image_resource:
+          name: ""
+          source:
+            repository: sconrod/python-aws
+            tag: v2
+          type: docker-image
+        inputs:
+          - name: git-resource
+          - name: lpass-out
+        outputs:
+          - name: gen-aws-cred
+        platform: linux
+        run:
+          path: /bin/sh
+          args:
+            - -cx
+            - |
+              mkdir ~/.aws
+              cp "lpass-out/item.json" "git-resource/item.json"
+              cd git-resource
+              chmod a+x convert.sh
+              ./convert.sh
+              export AWS_PAGER=""
+              aws configure import --csv file://item.cln.csv
+              aws configure set default.region us-east-2
+              export AWS_PAGER=""
+              aws sts get-caller-identity --query Account --output text
+              export AWS_PAGER=""
+              aws ec2 describe-regions
+              chmod a+x csr_deploy.sh
+              ./csr_deploy.sh
+          path: /bin/sh
+      task: build-csr1000v
+
+- name: deploy-ubuntu-lan
+  plan:
+    - get: lpass-res
+      version: every
+    - config:
+        image_resource:
+          name: ""
+          source:
+            repository: alpine
+          type: docker-image
+        inputs:
+          - name: lpass-res
+        outputs:
+          - name: lpass-out
+        platform: linux
+        run:
+          args:
+            - -cx
+            - |
+              cp "lpass-res/item" "lpass-out/item.json"
+          path: /bin/sh
+      task: print-item
+
+    - get: git-resource
+    - config:
+        image_resource:
+          name: ""
+          source:
+            repository: sconrod/python-aws
+            tag: v2
+          type: docker-image
+        inputs:
+          - name: git-resource
+          - name: lpass-out
+        outputs:
+          - name: gen-aws-cred
+        platform: linux
+        run:
+          path: /bin/sh
+          args:
+            - -cx
+            - |
+              mkdir ~/.aws
+              cp "lpass-out/item.json" "git-resource/item.json"
+              cd git-resource
+              chmod a+x convert.sh
+              export AWS_PAGER=""
+              ./convert.sh
+              aws configure import --csv file://item.cln.csv
+              aws configure set default.region us-east-2
+              aws sts get-caller-identity --query Account --output text
+              export AWS_PAGER=""
+              aws ec2 describe-regions
+              chmod a+x aws_ubuntu_lan_deploy.sh
+              ./aws_ubuntu_lan_deploy.sh
+          path: /bin/sh
+      task: build-ubuntu-router
+
+- name: deploy-ubuntu-router
+  plan:
+    - get: lpass-res
+      version: every
+    - config:
+        image_resource:
+          name: ""
+          source:
+            repository: alpine
+          type: docker-image
+        inputs:
+          - name: lpass-res
+        outputs:
+          - name: lpass-out
+        platform: linux
+        run:
+          args:
+            - -cx
+            - |
+              cp "lpass-res/item" "lpass-out/item.json"
+          path: /bin/sh
+      task: print-item
+
+    - get: git-resource
+    - config:
+        image_resource:
+          name: ""
+          source:
+            repository: sconrod/python-aws
+            tag: v2
+          type: docker-image
+        inputs:
+          - name: git-resource
+          - name: lpass-out
+        outputs:
+          - name: gen-aws-cred
+        platform: linux
+        run:
+          path: /bin/sh
+          args:
+            - -cx
+            - |
+              cp "lpass-out/item.json" "git-resource/item.json"
+              cd git-resource
+              chmod a+x convert.sh
+              ./convert.sh
+              export AWS_PAGER=""
+              aws configure import --csv file://item.cln.csv
+              aws sts get-caller-identity --query Account --output text
+              export AWS_PAGER=""
+              cp "~/.aws/*" "gen-aws-cred"
+              chmod a+x aws_ubuntu_router_deploy.sh
+              ./aws_ubuntu_router_deploy.sh
+          path: /bin/sh
+      task: build-ubuntu-router
+
+- name: configure-cisco-csr1000v
+  plan:
+    - get: lpass-res
+      version: every
+    - config:
+        image_resource:
+          name: ""
+          source:
+            repository: alpine
+          type: docker-image
+        inputs:
+          - name: lpass-res
+        outputs:
+          - name: lpass-out
+        platform: linux
+        run:
+          args:
+            - -cx
+            - |
+              cp "lpass-res/item" "lpass-out/item.json"
+          path: /bin/sh
+      task: print-item
+
+    - get: git-resource
+    - config:
+        image_resource:
+          name: ""
+          source:
+            repository: sconrod/python-aws
+            tag: v2
+          type: docker-image
+        inputs:
+          - name: git-resource
+          - name: lpass-out
+        params:
+          NAME: ((registry-username))
+          PASSWORD: ((registry-password))
+        platform: linux
+        run:
+          args:
+            - -cx
+            - |
+              mkdir ~/.aws
+              cp "lpass-out/item.json" "git-resource/item.json"
+              cd git-resource
+              chmod a+x convert.sh
+              ./convert.sh
+              aws configure import --csv file://item.cln.csv
+              aws sts get-caller-identity --query Account --output text
+              export AWS_PAGER=""
+              cp "~/.aws/*" "gen-aws-cred"
+              chmod a+x configure_csr.sh
+              ./configure_csr.sh
+          path: /bin/sh
+      task: configure-csr
+  public: true
+
+
+
+
+resource_types:
+  - name: lpass-type
+    source:
+      repository: ansd/lastpass
+      tag: 0.1.1
+    type: docker-image
+resources:
+  - name: git-resource
+    source:
+      Username: ((Username))
+      branch: ((git-branch))
+      email: ((email))
+      private_key: ((private_key))
+      uri: ((git-uri))
+    type: git
+  - name: lpass-res
+    source:
+      password: ((lpass-password))
+      username: ((lpass-username))
+    type: lpass-type
