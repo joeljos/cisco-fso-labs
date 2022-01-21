@@ -281,6 +281,7 @@ jobs:
               cd git-resource
               chmod a+x convert.sh
               ./convert.sh
+              export AWS_PAGER=""
               aws configure import --csv file://item.cln.csv
               aws sts get-caller-identity --query Account --output text
               export AWS_PAGER=""
