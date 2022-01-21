@@ -120,7 +120,6 @@ jobs:
               chmod a+x aws_deploy.sh
               ./aws_key.sh
               ./aws_deploy.sh
-              cp "~/.aws/*" "gen-aws-cred"
       task: build-vpc
 
 - name: deploy-csr1000v
@@ -380,7 +379,7 @@ resources:
   - name: git-resource
     source:
       Username: ((Username))
-      branch: dev
+      branch: ((git-branch))
       email: ((email))
       private_key: ((private_key))
       uri: ((git-uri))
