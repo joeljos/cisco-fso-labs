@@ -48,22 +48,18 @@ jobs:
           cp "git-resource/convert.sh" "gen-aws-cred/convert.sh"
           cp "git-resource/con-cred-json-csv.py" "gen-aws-cred/con-cred-json-csv.py"
           cd gen-aws-cred
-          sed '2,10d' item.json > cred.json
           chmod a+x convert.sh
-          python3 con-cred-json-csv.py > item.csv
-          sed -i -e '2s/^/default,/' item.csv
-          sed '/^$/d' item.csv > item.cln.csv
+          ./convert.sh
           export AWS_PAGER=""
           aws configure import --csv file://item.cln.csv
           aws configure set default.region us-east-2
           export AWS_PAGER=""
-          aws ec2 describe-regions
+          aws sts get-caller-identity --query Account --output text
     task: gen-lastpass-cred
 
 - name: deploy-aws-env
   plan:
     - get: lpass-res
-      trigger: true
       version: every
     - config:
         image_resource:
@@ -104,16 +100,18 @@ jobs:
             - -cx
             - |
               mkdir ~/.aws
-              cp "lpass-out/item.json" "git-resource/item.json"
-              cd git-resource
-              sed '2,10d' item.json > cred.json
+              cp "git-resource/sed.sh" "gen-aws-cred"
+              cp "lpass-out/item.json" "gen-aws-cred/item.json"
+              cp "git-resource/convert.sh" "gen-aws-cred/convert.sh"
+              cp "git-resource/con-cred-json-csv.py" "gen-aws-cred/con-cred-json-csv.py"
+              cd gen-aws-cred
               chmod a+x convert.sh
-              python3 con-cred-json-csv.py > item.csv
-              sed -i -e '2s/^/default,/' item.csv
-              sed '/^$/d' item.csv > item.cln.csv
+              ./convert.sh
               export AWS_PAGER=""
               aws configure import --csv file://item.cln.csv
               aws configure set default.region us-east-2
+              export AWS_PAGER=""
+              aws sts get-caller-identity --query Account --output text
               export AWS_PAGER=""
               aws ec2 describe-regions
               chmod a+x aws_key.sh
@@ -165,16 +163,18 @@ jobs:
             - -cx
             - |
               mkdir ~/.aws
-              cp "lpass-out/item.json" "git-resource/item.json"
-              cd git-resource
-              sed '2,10d' item.json > cred.json
+              cp "git-resource/sed.sh" "gen-aws-cred"
+              cp "lpass-out/item.json" "gen-aws-cred/item.json"
+              cp "git-resource/convert.sh" "gen-aws-cred/convert.sh"
+              cp "git-resource/con-cred-json-csv.py" "gen-aws-cred/con-cred-json-csv.py"
+              cd gen-aws-cred
               chmod a+x convert.sh
-              python3 con-cred-json-csv.py > item.csv
-              sed -i -e '2s/^/default,/' item.csv
-              sed '/^$/d' item.csv > item.cln.csv
+              ./convert.sh
               export AWS_PAGER=""
               aws configure import --csv file://item.cln.csv
               aws configure set default.region us-east-2
+              export AWS_PAGER=""
+              aws sts get-caller-identity --query Account --output text
               export AWS_PAGER=""
               aws ec2 describe-regions
               cp "~/.aws/*" "gen-aws-cred"
@@ -226,16 +226,18 @@ jobs:
             - -cx
             - |
               mkdir ~/.aws
-              cp "lpass-out/item.json" "git-resource/item.json"
-              cd git-resource
-              sed '2,10d' item.json > cred.json
+              cp "git-resource/sed.sh" "gen-aws-cred"
+              cp "lpass-out/item.json" "gen-aws-cred/item.json"
+              cp "git-resource/convert.sh" "gen-aws-cred/convert.sh"
+              cp "git-resource/con-cred-json-csv.py" "gen-aws-cred/con-cred-json-csv.py"
+              cd gen-aws-cred
               chmod a+x convert.sh
-              python3 con-cred-json-csv.py > item.csv
-              sed -i -e '2s/^/default,/' item.csv
-              sed '/^$/d' item.csv > item.cln.csv
+              ./convert.sh
               export AWS_PAGER=""
               aws configure import --csv file://item.cln.csv
               aws configure set default.region us-east-2
+              export AWS_PAGER=""
+              aws sts get-caller-identity --query Account --output text
               export AWS_PAGER=""
               aws ec2 describe-regions
               cp "~/.aws/*" "gen-aws-cred"
@@ -287,18 +289,16 @@ jobs:
             - -cx
             - |
               mkdir ~/.aws
-              cp "lpass-out/item.json" "git-resource/item.json"
-              cd git-resource
-              sed '2,10d' item.json > cred.json
+              cp "git-resource/sed.sh" "gen-aws-cred"
+              cp "lpass-out/item.json" "gen-aws-cred/item.json"
+              cp "git-resource/convert.sh" "gen-aws-cred/convert.sh"
+              cp "git-resource/con-cred-json-csv.py" "gen-aws-cred/con-cred-json-csv.py"
+              cd gen-aws-cred
               chmod a+x convert.sh
-              python3 con-cred-json-csv.py > item.csv
-              sed -i -e '2s/^/default,/' item.csv
-              sed '/^$/d' item.csv > item.cln.csv
-              export AWS_PAGER=""
+              ./convert.sh
               aws configure import --csv file://item.cln.csv
-              aws configure set default.region us-east-2
+              aws sts get-caller-identity --query Account --output text
               export AWS_PAGER=""
-              aws ec2 describe-regions
               cp "~/.aws/*" "gen-aws-cred"
               chmod a+x aws_ubuntu_router_deploy.sh
               ./aws_ubuntu_router_deploy.sh
@@ -348,18 +348,17 @@ jobs:
             - -cx
             - |
               mkdir ~/.aws
-              cp "lpass-out/item.json" "git-resource/item.json"
-              cd git-resource
-              sed '2,10d' item.json > cred.json
+              cp "git-resource/sed.sh" "gen-aws-cred"
+              cp "lpass-out/item.json" "gen-aws-cred/item.json"
+              cp "git-resource/convert.sh" "gen-aws-cred/convert.sh"
+              cp "git-resource/con-cred-json-csv.py" "gen-aws-cred/con-cred-json-csv.py"
+              cd gen-aws-cred
               chmod a+x convert.sh
-              python3 con-cred-json-csv.py > item.csv
-              sed -i -e '2s/^/default,/' item.csv
-              sed '/^$/d' item.csv > item.cln.csv
-              export AWS_PAGER=""
+              ./convert.sh
               aws configure import --csv file://item.cln.csv
-              aws configure set default.region us-east-2
+              aws sts get-caller-identity --query Account --output text
               export AWS_PAGER=""
-              rm -rf __pycache__
+              cp "~/.aws/*" "gen-aws-cred"
               chmod a+x configure_csr.sh
               ./configure_csr.sh
           path: /bin/sh
@@ -379,7 +378,7 @@ resources:
   - name: git-resource
     source:
       Username: ((Username))
-      branch: ((git-branch))
+      branch: dev
       email: ((email))
       private_key: ((private_key))
       uri: ((git-uri))
