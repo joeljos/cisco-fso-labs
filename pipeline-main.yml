@@ -378,7 +378,7 @@ resources:
   - name: git-resource
     source:
       Username: ((Username))
-      branch: dev
+      branch: ((branch))
       email: ((email))
       private_key: ((private_key))
       uri: ((git-uri))
