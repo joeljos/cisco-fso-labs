@@ -24,6 +24,7 @@ jobs:
     task: print-item
 
   - get: git-resource
+    trigger: true
   - config:
       image_resource:
         name: ""
