@@ -101,11 +101,8 @@ jobs:
             - -cx
             - |
               mkdir ~/.aws
-              cp "git-resource/sed.sh" "gen-aws-cred"
-              cp "lpass-out/item.json" "gen-aws-cred/item.json"
-              cp "git-resource/convert.sh" "gen-aws-cred/convert.sh"
-              cp "git-resource/con-cred-json-csv.py" "gen-aws-cred/con-cred-json-csv.py"
-              cd gen-aws-cred
+              cp "lpass-out/item.json" "git-resource/item.json"
+              cd git-resource
               chmod a+x convert.sh
               ./convert.sh
               export AWS_PAGER=""
@@ -164,11 +161,8 @@ jobs:
             - -cx
             - |
               mkdir ~/.aws
-              cp "git-resource/sed.sh" "gen-aws-cred"
-              cp "lpass-out/item.json" "gen-aws-cred/item.json"
-              cp "git-resource/convert.sh" "gen-aws-cred/convert.sh"
-              cp "git-resource/con-cred-json-csv.py" "gen-aws-cred/con-cred-json-csv.py"
-              cd gen-aws-cred
+              cp "lpass-out/item.json" "git-resource/item.json"
+              cd git-resource
               chmod a+x convert.sh
               ./convert.sh
               export AWS_PAGER=""
@@ -178,7 +172,6 @@ jobs:
               aws sts get-caller-identity --query Account --output text
               export AWS_PAGER=""
               aws ec2 describe-regions
-              cp "~/.aws/*" "gen-aws-cred"
               chmod a+x csr_deploy.sh
               ./csr_deploy.sh
           path: /bin/sh
@@ -227,21 +220,16 @@ jobs:
             - -cx
             - |
               mkdir ~/.aws
-              cp "git-resource/sed.sh" "gen-aws-cred"
-              cp "lpass-out/item.json" "gen-aws-cred/item.json"
-              cp "git-resource/convert.sh" "gen-aws-cred/convert.sh"
-              cp "git-resource/con-cred-json-csv.py" "gen-aws-cred/con-cred-json-csv.py"
-              cd gen-aws-cred
+              cp "lpass-out/item.json" "git-resource/item.json"
+              cd git-resource
               chmod a+x convert.sh
-              ./convert.sh
               export AWS_PAGER=""
+              ./convert.sh
               aws configure import --csv file://item.cln.csv
               aws configure set default.region us-east-2
-              export AWS_PAGER=""
               aws sts get-caller-identity --query Account --output text
               export AWS_PAGER=""
               aws ec2 describe-regions
-              cp "~/.aws/*" "gen-aws-cred"
               chmod a+x aws_ubuntu_lan_deploy.sh
               ./aws_ubuntu_lan_deploy.sh
           path: /bin/sh
@@ -289,12 +277,8 @@ jobs:
           args:
             - -cx
             - |
-              mkdir ~/.aws
-              cp "git-resource/sed.sh" "gen-aws-cred"
-              cp "lpass-out/item.json" "gen-aws-cred/item.json"
-              cp "git-resource/convert.sh" "gen-aws-cred/convert.sh"
-              cp "git-resource/con-cred-json-csv.py" "gen-aws-cred/con-cred-json-csv.py"
-              cd gen-aws-cred
+              cp "lpass-out/item.json" "git-resource/item.json"
+              cd git-resource
               chmod a+x convert.sh
               ./convert.sh
               aws configure import --csv file://item.cln.csv
@@ -349,11 +333,8 @@ jobs:
             - -cx
             - |
               mkdir ~/.aws
-              cp "git-resource/sed.sh" "gen-aws-cred"
-              cp "lpass-out/item.json" "gen-aws-cred/item.json"
-              cp "git-resource/convert.sh" "gen-aws-cred/convert.sh"
-              cp "git-resource/con-cred-json-csv.py" "gen-aws-cred/con-cred-json-csv.py"
-              cd gen-aws-cred
+              cp "lpass-out/item.json" "git-resource/item.json"
+              cd git-resource
               chmod a+x convert.sh
               ./convert.sh
               aws configure import --csv file://item.cln.csv
