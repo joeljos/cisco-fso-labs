@@ -339,7 +339,6 @@ jobs:
               aws configure import --csv file://item.cln.csv
               aws sts get-caller-identity --query Account --output text
               export AWS_PAGER=""
-              cp "~/.aws/*" "gen-aws-cred"
               chmod a+x configure_csr.sh
               ./configure_csr.sh
           path: /bin/sh
