@@ -34,9 +34,9 @@ Students of this lab require at least basic experience and skills with:
 
 1. Clone the git repo at https://github.com/devops-ontap/cisco-fso-labs
 - In your home directory on the Lab Computer use the command below from a shell
-```
-git clone git@github.com:devops-ontap/cisco-fso-labs.git
-```
+    ```
+    git clone git@github.com:devops-ontap/cisco-fso-labs.git
+    ```
 
 2. Create a Branch - each lab user will create their own branch
 - In this lab we will not be doing a git merge. Students will work from their own branches
