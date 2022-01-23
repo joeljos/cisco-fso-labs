@@ -58,7 +58,7 @@ Students of this lab require at least basic experience and skills with:
 
 4. Login to the ci tool concourse (you will be provided with a credential - the credential is assigned to a Team called Nterone).
    Everyone in your Team has access to the same pipelines. Access to pipe-lines is by Team.
-  - Download the fly too from http://ci.devops-ontap.com:8080
+   - Download the fly too from http://ci.devops-ontap.com:8080
    **Commands to enter after fly file has been downloaded (Mac instructions only)**
 
     ```
