@@ -16,8 +16,7 @@ cmd_get_csr1000v_inst_id='aws ec2 describe-instances --region' + " " + "{}".form
 output = check_output("{}".format(cmd_get_csr_pub_ip), shell=True).decode().strip()
 print("Output: \n{}\n".format(output)
 
-'''
-#Get the instance ID and write it to the vars file
+#Get the instance ID
 with open (outfile_csr_inst) as access_json:
     read_content = json.load(access_json)
     question_access = read_content['Instances']
@@ -25,7 +24,6 @@ with open (outfile_csr_inst) as access_json:
     replies_data=replies_access['InstanceId']
     print(replies_data)
     csr1000v_instance_id=replies_data
-'''
 
 #Get the external public address assigned to the csr1000v and write it to the var file or vault
 outfile_csr_pub_ip='csr_pub_ip.json'

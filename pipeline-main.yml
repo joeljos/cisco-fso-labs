@@ -339,7 +339,6 @@ jobs:
               export AWS_PAGER=""
               aws configure import --csv file://item.cln.csv
               aws sts get-caller-identity --query Account --output text
-
               chmod a+x configure_csr.sh
               ./configure_csr.sh
           path: /bin/sh
