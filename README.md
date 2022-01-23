@@ -88,8 +88,8 @@ Students of this lab require at least basic experience and skills with:
     #csr_ami_id = "ami-0453b3bb1d98a0102"  #us-west-2
     ```
 
-Please note, in AWS the AMI names for images are different per region  - the file has 4 AMIs set for each image.  3 of each should be commented out or deleted by the student.
-You can have 4 azs to a region, so you can have 4 isolated labs to a region. The instructor will need to assign each set of 4 students to a unique region.  (this will support up to 16 students)
+    Please note, in AWS the AMI names for images are different per region  - the file has 4 AMIs set for each image.  3 of each should be commented out or deleted by the student.
+    You can have 4 azs to a region, so you can have 4 isolated labs to a region. The instructor will need to assign each set of 4 students to a unique region.  (this will support up to 16 students)
     
 
 6. Create a params directory OUTSIDE of the git repo, and copy out the sample-params.yml file into that directory.
@@ -134,7 +134,7 @@ You can have 4 azs to a region, so you can have 4 isolated labs to a region. The
     fly -t ci set-pipeline -c pipeline-your_branch_name_here.yml -p cisco-your_branch_name_here -l /path_to_the params_directory/params/params-instructor.yml
     fly -t ci unpause-pipeline -p cisco-instructor
     ```
-the pipeline can be destroyed any time with this command
+- The pipeline can be destroyed any time with this command
     ```
     fly -t ci destroy-pipeline -p cisco-instructor
     ```
