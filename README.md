@@ -37,6 +37,7 @@ Once vetted, the repo will be made public so this is only temporary during the b
 
 1. Clone the git repo
 https://github.com/devops-ontap/cisco-fso-labs
+- git clone git@github.com:devops-ontap/cisco-fso-labs.git
 
 2. Create a Branch - each lab user will create their own branch
 - in this lab we will not doing a git merge. people will work from their own branches
@@ -46,35 +47,86 @@ https://github.com/devops-ontap/cisco-fso-labs
 
 3. Setup your IAM account with Admin/FullEC2 and ability to generate VPCs and add the key in lastpass vault secure note
     - In this lab - using lastpass as it is free and fast/simple to set up an account. Add the key to lastpass in a note in the AWS csv format
+      - Named: aws_cred
+      - Contents = (enter your key and secret)
+      User Name,Access key ID,Secret access key
+      default,your_AWS_Key,your_AWS_secret
+
     - we will be using lastpass as our vault for now. Subsequent iterations will use Hashicorp Vault and AD
 
 4. Login to the ci tool concourse (you will be provided with a credential - the credential is assigned to a Team).
    Everyone in your Team has access to the same pipelines. Access to pipe-lines is by Team.
    download the fly too from http://ci.devops-ontap.com:8080
+   - Commands to enter after fly file has been downloaded (Mac instructions only)
 
-sudo mkdir -p /usr/local/bin
-sudo mv ~/Downloads/fly /usr/local/bin
-sudo chmod 0755 /usr/local/bin/fly
+    sudo mkdir -p /usr/local/bin
+    sudo mv ~/Downloads/fly /usr/local/bin
+    sudo chmod 0755 /usr/local/bin/fly
 
-5. From within your git repo directory - update your lab_vars.py file with the name you want to use for your lab. For simplicity, keep the the name the same as your branch name
-6. create a params directory outside of the git repo, and copy out the sample-params.yml file into that directory.
-7. Update the master pipeline file parameters file with your branch name
-8. Update the params file with your branch name(same as lab name) and your git SSH private key and email address (the git credentials are only required when the lab repo is private)
+5. From within your git repo directory - update your lab_vars.py file with the name you want to use for your lab. For simplicity, keep the the name the same as your branch name (instructor in exampe below).  Also comment/uncomment so the desired regions is set (default shows "us-east-1")
+  - Example file: 
 
-Please note, in AWS the AMI names for images are different per region - so prior to entering in the AMI code - you must discover what it is for the region you want to provision your lab to
-For simplicity, each lab environment is deployed to its own region and az. You can have 4 azs to a region, so you can have 4 isolated labs to a region.
-For an instructor wanting each student to have their own lab, they would select 4 regions, each with one az and assign it to each student.
+    name = "instructor"
+    region = "us-east-1"
+    az = "us-east-1a"
+    # az = "us-east-2a"
+    # az = "us-west-1a"
+    # az = "us-west-2a"
+    ubuntu_ami_id = "ami-0b359b42108ad6fd2"  # us-east-1
+    # ubuntu_ami_id = "ami-093ab2ee72248accb"  # us-east-2
+    # ubuntu_ami_id = "ami-014723d9d9c12a060"  # us-west-1
+    # ubuntu_ami_id = "ami-0ed08ddf96d9628f3"  # us-west-2
+    csr_ami_id = "ami-067c66abd840abc24"  # us-east-1
+    # csr_ami_id = "ami-0d43ca842a14ff342"  # us-east-2
+    # csr_ami_id = "ami-07dde80b3b3ccfb2f"  # us-west-1
+    # csr_ami_id = "ami-0453b3bb1d98a0102"  # us-west-2
 
-9.
+    Please note, in AWS the AMI names for images are different per region  - the file has 4 AMIs set for each image.  3 of each should be commented out or deleted by the student.
+    You can have 4 azs to a region, so you can have 4 isolated labs to a region. The instructor will need to assign each set of 4 students to a unique region.  (this will support up to 16 students)
+    
+
+6. create a params directory OUTSIDE of the git repo, and copy out the sample-params.yml file into that directory.
+  - mkdir params
+  
+
+7. Update the master pipeline file parameters file with your branch name, private key, the github username and email address ( are only required when the lab repo is private)
+  - Example file:
+
+    lpass-username: your_last_pass_email_here
+    lpass-password: your_last_pass_password_here
+    git-branch: your_branch_name_here 
+    git-uri: git@github.com:devops-ontap/cisco-fso-labs.git
+    Username: your_github_username_here (if private)
+    email: your_associated_github_email_here (if private)
+    image-repo-name: sconrod
+    registry-username:
+    registry-password:
+    private_key: |
+    -----BEGIN OPENSSH PRIVATE KEY----- (remove this line before pasting, leave the | above with a carriage return)
+    your private ssh key here(this can be a lab computer where students work)
+    ssh-keygen
+    cat ~/.ssh/rsa_id
+    pbcopy < ~/.ssh/id_rsa
+    then paste contents here
+    -----END OPENSSH PRIVATE KEY----- (remove this line before pasting, ensure no trailing spaces)
+
+8.
 target the ci tool using fly and set your pipeline
 example:
 Login to a Team
-fly -t ci login --concourse-url=http://ci.devops-ontap.com:8080 -n nterone
-This command opens a browser, login and then capture the token and paste it into your command prompt
+- http://ci.devops-ontap.com:8080
+- fly --target=ci login --concourse-url=http://ci.devops-ontap.com:8080 --username=your_username_here -n nterone\n
+  Then paste the URL into a browser and login if requested (it may transfer the token automatically)
 
-10. set the pipeline and keep the pipeline suffix name the same as your lab name and your branch name for consistency, example:
-    fly -t ci set-pipeline -c pipeline-master-v1.yml -p cicsco-fso-lab1 -l ../params/pipeline-params.yml
 
+9. set the pipeline and keep the pipeline suffix name the same as your lab name and your branch name for consistency, example:
+  - fly -t ci set-pipeline -c pipeline-your_branch_name_here.yml -p cisco-your_branch_name_here -l /path_to_the params_directory/params/params-instructor.yml
+  - fly -t ci unpause-pipeline -p cisco-instructor
+
+  fly -t ci destroy-pipeline -p cisco-instructor (the pipeline can be destroyed any time with this command)
+
+
+----------------------------------------
 Update the lab_vars.py file accordingly
 git add  lab_vars.py
 git commit - "updated lab vars file"
@@ -102,18 +154,6 @@ Once the Deploy AWS Env job turns green, start the Deploy Cisco CSR1000V job
 This job takes the longest, as before much of the code can execute it must wait on the
 instance to fully initialize, so there is polling set up in the job.
 
-
-
-
-
-
-
-
-
-
-
-
-
 All configuration in this lab will be done via code - we will only use the GUI to view the changes we make via code. In reality the GUI is not even required
 however, we use it only as a visual familiar representation of our changes as it is most familiar to the students in the lab.
 
@@ -129,10 +169,6 @@ to successfully manage hybrid cloud and cloud networking environments.
 To ensure stability of our infrastructure, it is required to manage it via code using the SDLC and Industrial Pipelines.
 
 As soon as a git push is complete, the lab prep job in the pipeline automatically starts
-
-
-
-
 
 
 openssl rsa -outform der -in private.pem -out private.key

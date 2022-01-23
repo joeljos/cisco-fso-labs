@@ -1,6 +1,9 @@
 name = "instructor"
 region = "us-east-1"
 az = "us-east-1a"
+# az = "us-east-2a"
+# az = "us-west-1a"
+# az = "us-west-2a"
 ubuntu_ami_id = "ami-0b359b42108ad6fd2"  # us-east-1
 # ubuntu_ami_id = "ami-093ab2ee72248accb"  # us-east-2
 # ubuntu_ami_id = "ami-014723d9d9c12a060"  # us-west-1
