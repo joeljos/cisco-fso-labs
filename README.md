@@ -134,7 +134,7 @@ Students of this lab require at least basic experience and skills with:
     fly -t ci set-pipeline -c pipeline-your_branch_name_here.yml -p cisco-your_branch_name_here -l /path_to_the params_directory/params/params-instructor.yml
     fly -t ci unpause-pipeline -p cisco-instructor
     ```
-  - The pipeline can be destroyed at any time during the class with this command and then recreated with the commands above
+    - The pipeline can be destroyed at any time during the class with this command and then recreated with the commands above
     ```
     fly -t ci destroy-pipeline -p cisco-instructor
     ```
