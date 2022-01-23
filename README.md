@@ -59,7 +59,7 @@ we will be using lastpass as our vault for now. Subsequent iterations will use H
 
 4. Login to the ci tool concourse (you will be provided with a credential - the credential is assigned to a Team called Nterone).
    Everyone in your Team has access to the same pipelines. Access to pipe-lines is by Team.
-   - Download the fly too from http://ci.devops-ontap.com:8080
+- Download the fly too from http://ci.devops-ontap.com:8080
    **Commands to enter after fly file has been downloaded (Mac instructions only)**
 
 ```
@@ -70,7 +70,7 @@ sudo chmod 0755 /usr/local/bin/fly
 
 5. From within your git repo directory - update your lab_vars.py file with the name you want to use for your lab. For simplicity, keep the the name the same as your branch name (instructor in exampe below).  Also comment/uncomment so the desired regions is set (default shows "us-east-1")
 
-**Example file:** 
+**Example lab_vars.py file:** 
 ```
 name = "instructor"
 region = "us-east-1"
@@ -96,7 +96,7 @@ You can have 4 azs to a region, so you can have 4 isolated labs to a region. The
 ```mkdir params```
   
 7. Update the master pipeline file parameters file with your branch name, private key, the github username and email address ( are only required when the lab repo is private)
-**Example file:**
+**Example params file:**
 ```
 lpass-username: your_last_pass_email_here
 lpass-password: your_last_pass_password_here
@@ -117,10 +117,10 @@ then paste contents here
 -----END OPENSSH PRIVATE KEY----- (remove this line before pasting, ensure no trailing spaces)
 ```
 
-8.Target the Concourse ci tool using fly and set your pipeline
+8. Target the Concourse ci tool using fly and set your pipeline
+
 **Example:**
-Login to Concourse in a browser at:
-http://ci.devops-ontap.com:8080
+- Login to Concourse in a browser at: http://ci.devops-ontap.com:8080
 ```
 fly --target=ci login --concourse-url=http://ci.devops-ontap.com:8080 --username=your_username_here -n nterone\n
 ```
