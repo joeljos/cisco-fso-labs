@@ -88,7 +88,7 @@ Students of this lab require at least basic experience and skills with:
     #csr_ami_id = "ami-0453b3bb1d98a0102"  #us-west-2
     ```
 
-    **NOTE:**: In AWS the AMI names for images are different per region  - the file has 4 AMIs set for each image.  3 of each should be commented out or deleted by the student.
+    **NOTE:** In AWS the AMI names for images are different per region  - the file has 4 AMIs set for each image.  3 of each should be commented out or deleted by the student.
     You can have 4 azs to a region, so you can have 4 isolated labs to a region. The instructor will need to assign each set of 4 students to a unique region.  (this will support up to 16 students)
     
 
