@@ -57,10 +57,10 @@ default,your_AWS_Key,your_AWS_secret
 ```  
 we will be using lastpass as our vault for now. Subsequent iterations will use Hashicorp Vault and AD
 
-4. Login to the ci tool concourse (you will be provided with a credential - the credential is assigned to a Team).
+4. Login to the ci tool concourse (you will be provided with a credential - the credential is assigned to a Team called Nterone).
    Everyone in your Team has access to the same pipelines. Access to pipe-lines is by Team.
-   download the fly too from http://ci.devops-ontap.com:8080
-   - Commands to enter after fly file has been downloaded (Mac instructions only)
+   - Download the fly too from http://ci.devops-ontap.com:8080
+   **Commands to enter after fly file has been downloaded (Mac instructions only)**
 
 ```
 sudo mkdir -p /usr/local/bin
@@ -87,8 +87,8 @@ csr_ami_id = "ami-067c66abd840abc24"  #us-east-1
 #csr_ami_id = "ami-07dde80b3b3ccfb2f"  #us-west-1
 #csr_ami_id = "ami-0453b3bb1d98a0102"  #us-west-2
 ```
-    Please note, in AWS the AMI names for images are different per region  - the file has 4 AMIs set for each image.  3 of each should be commented out or deleted by the student.
-    You can have 4 azs to a region, so you can have 4 isolated labs to a region. The instructor will need to assign each set of 4 students to a unique region.  (this will support up to 16 students)
+Please note, in AWS the AMI names for images are different per region  - the file has 4 AMIs set for each image.  3 of each should be commented out or deleted by the student.
+You can have 4 azs to a region, so you can have 4 isolated labs to a region. The instructor will need to assign each set of 4 students to a unique region.  (this will support up to 16 students)
     
 
 6. create a params directory OUTSIDE of the git repo, and copy out the sample-params.yml file into that directory.\
@@ -127,7 +127,7 @@ fly --target=ci login --concourse-url=http://ci.devops-ontap.com:8080 --username
   Then paste the URL into a browser and login if requested (it may transfer the token automatically)
 
 
-9. set the pipeline and keep the pipeline suffix name the same as your lab name and your branch name for consistency, example:
+9. Set the pipeline and keep the pipeline suffix name the same as your lab name and your branch name for consistency, example:
 ```
 fly -t ci set-pipeline -c pipeline-your_branch_name_here.yml -p cisco-your_branch_name_here -l /path_to_the params_directory/params/params-instructor.yml
 fly -t ci unpause-pipeline -p cisco-instructor
