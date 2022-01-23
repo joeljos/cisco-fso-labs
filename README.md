@@ -91,9 +91,9 @@ Please note, in AWS the AMI names for images are different per region  - the fil
 You can have 4 azs to a region, so you can have 4 isolated labs to a region. The instructor will need to assign each set of 4 students to a unique region.  (this will support up to 16 students)
     
 
-6. create a params directory OUTSIDE of the git repo, and copy out the sample-params.yml file into that directory.\
+6. Create a params directory OUTSIDE of the git repo, and copy out the sample-params.yml file into that directory.
   
-  ```mkdir params```
+    ```mkdir params```
   
 7. Update the master pipeline file parameters file with your branch name, private key, the github username and email address ( are only required when the lab repo is private)
 **Example params file:**
