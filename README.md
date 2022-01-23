@@ -3,28 +3,27 @@ cisco-fso-lab
 # LAB SETUP
 
 This lab demonstrates simple integration with a variety of common APIs that perform standard operational standard stack functions:
-vault & artifactory placeholder- lastpass
-kubernetes - ci tool
-kubernetes - sample java apps
-aws - cloud provider
-python, shell, bash
-docker
-Appdynamics
-ThousandEyes
-github/gitlab
-cisco csr1000v
-IOX XE
+- vault & artifactory placeholder- lastpass
+- kubernetes - ci tool
+- kubernetes - sample java apps
+- aws - cloud provider
+- python, shell, bash
+- docker
+- Appdynamics
+- ThousandEyes
+- github/gitlab
+- cisco csr1000v
+- IOX XE
 
-Instructors of this lab should have:
-Intermediate hands on skills with the following:
-git branching and github/gitlab - managing repos and branches, understand git flow and developer processes using git to rapidly iterate on code
-advanced json and yaml file format understanding
-advanced cisco networking
-advanced docker
-advanced aws and cloud networking
-Advanced knowledge and experience with SDLC, rapid iteration and current develops rapid iteration concepts
-Green/Red rapid iteration development cycle and code testing concepts
-The importance of ensuring all cloud based infrastructure is managed as code - Infra as Code
+Instructors of this lab should have hands on skills with the following:
+- git branching and github/gitlab - managing repos and branches, understand git flow and developer processes using git to rapidly - - iterate on code
+- advanced json and yaml file format understanding
+- advanced cisco networking
+- advanced docker
+- advanced aws and cloud networking
+- Advanced knowledge and experience with SDLC, rapid iteration and current develops rapid iteration concepts
+- Green/Red rapid iteration development cycle and code testing concepts
+- The importance of ensuring all cloud based infrastructure is managed as code - Infra as Code
 
 Students of this lab require at least basic experience and skills with:
 - git flow, creating branches, updating code etc.
