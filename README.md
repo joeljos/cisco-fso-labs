@@ -121,8 +121,8 @@ Students of this lab require at least basic experience and skills with:
 8. Target the Concourse ci tool using fly and set your pipeline
 
     **Example Fly token transfer:**
-  - Login to Concourse in a browser at: http://ci.devops-ontap.com:8080
-  - Enter the following command on your the lab desktops shell
+   - Login to Concourse in a browser at: http://ci.devops-ontap.com:8080
+   - Enter the following command on your the lab desktops shell
     ```
     fly --target=ci login --concourse-url=http://ci.devops-ontap.com:8080 --username=your_username_here -n nterone\n
     ```
