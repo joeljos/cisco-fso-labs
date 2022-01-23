@@ -27,20 +27,20 @@ Green/Red rapid iteration development cycle and code testing concepts
 The importance of ensuring all cloud based infrastructure is managed as code - Infra as Code
 
 Students of this lab require at least basic experience and skills with:
-git flow, creating branches, updating code etc.
-ssh keys - generating and using
-linux command line, shell, bash
-basic python
-basic docker
+- git flow, creating branches, updating code etc.
+- ssh keys - generating and using
+-linux command line, shell, bash
+- basic python
 
 
 1. Clone the git repo at https://github.com/devops-ontap/cisco-fso-labs
+- In your home directory on the Lab Computer use the command below from a shell
 ```
 git clone git@github.com:devops-ontap/cisco-fso-labs.git
 ```
 
 2. Create a Branch - each lab user will create their own branch
-- in this lab we will not doing a git merge. people will work from their own branches
+- In this lab we will not be doing a git merge. Students will work from their own branches
 ```
 git checkout -b yourname
 git status
@@ -50,7 +50,7 @@ git fetch --all
 3. Setup your IAM account with Admin/FullEC2 and ability to generate VPCs and add the key in lastpass vault secure note
  In this lab - using lastpass as it is free and fast/simple to set up an account. Add the key to lastpass in a note in the AWS csv format
  - Named: aws_cred
- - Contents = (enter the text below entering your AWS key and secret)
+ - Contents = (Use formatting below exactly, use your AWS key and secret)
 ```
 User Name,Access key ID,Secret access key
 default,your_AWS_Key,your_AWS_secret
@@ -92,8 +92,8 @@ You can have 4 azs to a region, so you can have 4 isolated labs to a region. The
     
 
 6. create a params directory OUTSIDE of the git repo, and copy out the sample-params.yml file into that directory.\
-
-```mkdir params```
+  
+  ```mkdir params```
   
 7. Update the master pipeline file parameters file with your branch name, private key, the github username and email address ( are only required when the lab repo is private)
 **Example params file:**
@@ -119,8 +119,9 @@ then paste contents here
 
 8. Target the Concourse ci tool using fly and set your pipeline
 
-**Example:**
+**Example Fly token transfer:**
 - Login to Concourse in a browser at: http://ci.devops-ontap.com:8080
+- Enter the following command on your the lab desktops shell
 ```
 fly --target=ci login --concourse-url=http://ci.devops-ontap.com:8080 --username=your_username_here -n nterone\n
 ```
