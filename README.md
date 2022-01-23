@@ -48,13 +48,13 @@ git fetch --all
 
 3. Setup your IAM account with Admin/FullEC2 and ability to generate VPCs and add the key in lastpass vault secure note
  In this lab - using lastpass as it is free and fast/simple to set up an account. Add the key to lastpass in a note in the AWS csv format
- - Named: aws_cred
- - Contents = (Use formatting below exactly, use your AWS key and secret)
+- Named: aws_cred
+- Contents = (Use formatting below exactly, use your AWS key and secret)
 ```
 User Name,Access key ID,Secret access key
 default,your_AWS_Key,your_AWS_secret
 ```  
-we will be using lastpass as our vault for now. Subsequent iterations will use Hashicorp Vault and AD
+- We will be using lastpass as our vault for now. Subsequent iterations will use Hashicorp Vault and AD
 
 4. Login to the ci tool concourse (you will be provided with a credential - the credential is assigned to a Team called Nterone).
    Everyone in your Team has access to the same pipelines. Access to pipe-lines is by Team.
