@@ -1,6 +1,5 @@
 # cisco-fso-labs
 cisco-fso-lab
-# LAB SETUP
 
 This lab demonstrates simple integration with a variety of common APIs that perform standard operational standard stack functions:
 - vault & artifactory placeholder- lastpass
@@ -31,6 +30,7 @@ Students of this lab require at least basic experience and skills with:
 -linux command line, shell, bash
 - basic python
 
+# Lab Setup
 
 1. Clone the git repo at https://github.com/devops-ontap/cisco-fso-labs
    - In your home directory on the Lab Computer use the command below from a shell
