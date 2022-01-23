@@ -40,11 +40,11 @@ git clone git@github.com:devops-ontap/cisco-fso-labs.git
 
 2. Create a Branch - each lab user will create their own branch
 - In this lab we will not be doing a git merge. Students will work from their own branches
-```
-git checkout -b yourname
-git status
-git fetch --all
-```
+    ```
+    git checkout -b yourname
+    git status
+    git fetch --all
+    ```
 
 3. Setup your IAM account with Admin/FullEC2 and ability to generate VPCs and add the key in lastpass vault secure note
  In this lab - using lastpass as it is free and fast/simple to set up an account. Add the key to lastpass in a note in the AWS csv format
