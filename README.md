@@ -33,13 +33,13 @@ Students of this lab require at least basic experience and skills with:
 
 
 1. Clone the git repo at https://github.com/devops-ontap/cisco-fso-labs
-- In your home directory on the Lab Computer use the command below from a shell
+  - In your home directory on the Lab Computer use the command below from a shell
     ```
     git clone git@github.com:devops-ontap/cisco-fso-labs.git
     ```
 
 2. Create a Branch - each lab user will create their own branch
-- In this lab we will not be doing a git merge. Students will work from their own branches
+  - In this lab we will not be doing a git merge. Students will work from their own branches
     ```
     git checkout -b yourname
     git status
@@ -48,17 +48,17 @@ Students of this lab require at least basic experience and skills with:
 
 3. Setup your IAM account with Admin/FullEC2 and ability to generate VPCs and add the key in lastpass vault secure note
  In this lab - using lastpass as it is free and fast/simple to set up an account. Add the key to lastpass in a note in the AWS csv format
-- Create a secure note named: **aws_cred**
-- The contents of the secure note: (Use formatting below exactly, use your AWS key and secret)
+  - Create a secure note named: **aws_cred**
+  - The contents of the secure note: (Use formatting below exactly, use your AWS key and secret)
     ```
     User Name,Access key ID,Secret access key
     default,your_AWS_Key,your_AWS_secret
     ```  
-- We will be using lastpass as our vault for now. Subsequent iterations will use Hashicorp Vault and AD
+  - We will be using lastpass as our vault for now. Subsequent iterations will use Hashicorp Vault and AD
 
 4. Login to the ci tool concourse (you will be provided with a credential - the credential is assigned to a Team called Nterone).
    Everyone in your Team has access to the same pipelines. Access to pipe-lines is by Team.
-- Download the fly too from http://ci.devops-ontap.com:8080
+  - Download the fly too from http://ci.devops-ontap.com:8080
    **Commands to enter after fly file has been downloaded (Mac instructions only)**
 
     ```
@@ -121,8 +121,8 @@ Students of this lab require at least basic experience and skills with:
 8. Target the Concourse ci tool using fly and set your pipeline
 
     **Example Fly token transfer:**
-- Login to Concourse in a browser at: http://ci.devops-ontap.com:8080
-- Enter the following command on your the lab desktops shell
+  - Login to Concourse in a browser at: http://ci.devops-ontap.com:8080
+  - Enter the following command on your the lab desktops shell
     ```
     fly --target=ci login --concourse-url=http://ci.devops-ontap.com:8080 --username=your_username_here -n nterone\n
     ```
@@ -134,7 +134,7 @@ Students of this lab require at least basic experience and skills with:
     fly -t ci set-pipeline -c pipeline-your_branch_name_here.yml -p cisco-your_branch_name_here -l /path_to_the params_directory/params/params-instructor.yml
     fly -t ci unpause-pipeline -p cisco-instructor
     ```
-- The pipeline can be destroyed any time with this command
+  - The pipeline can be destroyed at any time during the class with this command and then recreated with the commands above
     ```
     fly -t ci destroy-pipeline -p cisco-instructor
     ```
