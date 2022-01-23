@@ -69,7 +69,7 @@ Students of this lab require at least basic experience and skills with:
 
 5. From within your git repo directory - update your lab_vars.py file with the name you want to use for your lab. For simplicity, keep the the name the same as your branch name (instructor in exampe below).  Also comment/uncomment so the desired regions is set (default shows "us-east-1")
 
-**Example lab_vars.py file:** 
+    **Example lab_vars.py file:** 
 
     ```
     name = "instructor"
@@ -97,7 +97,7 @@ You can have 4 azs to a region, so you can have 4 isolated labs to a region. The
     ```mkdir params```
   
 7. Update the master pipeline file parameters file with your branch name, private key, the github username and email address ( are only required when the lab repo is private)
-**Example params file:**
+    **Example params file:**
     ```
     lpass-username: your_last_pass_email_here
     lpass-password: your_last_pass_password_here
@@ -120,7 +120,7 @@ You can have 4 azs to a region, so you can have 4 isolated labs to a region. The
 
 8. Target the Concourse ci tool using fly and set your pipeline
 
-**Example Fly token transfer:**
+    **Example Fly token transfer:**
 - Login to Concourse in a browser at: http://ci.devops-ontap.com:8080
 - Enter the following command on your the lab desktops shell
     ```
