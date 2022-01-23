@@ -69,17 +69,17 @@ https://github.com/devops-ontap/cisco-fso-labs
     name = "instructor"
     region = "us-east-1"
     az = "us-east-1a"
-    # az = "us-east-2a"
-    # az = "us-west-1a"
-    # az = "us-west-2a"
+    #az = "us-east-2a"
+    #az = "us-west-1a"
+    #az = "us-west-2a"
     ubuntu_ami_id = "ami-0b359b42108ad6fd2"  # us-east-1
-    # ubuntu_ami_id = "ami-093ab2ee72248accb"  # us-east-2
-    # ubuntu_ami_id = "ami-014723d9d9c12a060"  # us-west-1
-    # ubuntu_ami_id = "ami-0ed08ddf96d9628f3"  # us-west-2
+    #ubuntu_ami_id = "ami-093ab2ee72248accb"  # us-east-2
+    #ubuntu_ami_id = "ami-014723d9d9c12a060"  # us-west-1
+    #ubuntu_ami_id = "ami-0ed08ddf96d9628f3"  # us-west-2
     csr_ami_id = "ami-067c66abd840abc24"  # us-east-1
-    # csr_ami_id = "ami-0d43ca842a14ff342"  # us-east-2
-    # csr_ami_id = "ami-07dde80b3b3ccfb2f"  # us-west-1
-    # csr_ami_id = "ami-0453b3bb1d98a0102"  # us-west-2
+    #csr_ami_id = "ami-0d43ca842a14ff342"  # us-east-2
+    #csr_ami_id = "ami-07dde80b3b3ccfb2f"  # us-west-1
+    #csr_ami_id = "ami-0453b3bb1d98a0102"  # us-west-2
 
     Please note, in AWS the AMI names for images are different per region  - the file has 4 AMIs set for each image.  3 of each should be commented out or deleted by the student.
     You can have 4 azs to a region, so you can have 4 isolated labs to a region. The instructor will need to assign each set of 4 students to a unique region.  (this will support up to 16 students)
