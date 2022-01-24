@@ -67,7 +67,7 @@ Students of this lab require at least basic experience and skills with:
     sudo chmod 0755 /usr/local/bin/fly
     ```
 
-5. From within your git repo directory - update your lab_vars.py file with the name you want to use for your lab. For simplicity, keep the the name the same as your branch name (instructor in exampe below).  Also comment/uncomment so the desired regions is set (default shows "us-east-1")
+5. From within your git repo directory - update your lab_vars.py file with the name you want to use for your lab. For simplicity, keep the the name the same as your branch name (**instructor** in example below).  Also comment/uncomment so the desired regions is set (default shows "us-east-1")
 
     **Example lab_vars.py file:** 
 
