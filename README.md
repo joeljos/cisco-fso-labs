@@ -183,7 +183,7 @@ To ensure stability of our infrastructure, it is required to manage it via code 
 
 As soon as a git push is complete, the lab prep job in the pipeline automatically starts
 
-## CSR1000 Issue
+### CSR1000 Known Issue and Workaround
 openssl rsa -outform der -in private.pem -out private.key
 
 Common Error when trying to SSH to the CSR1000v:
