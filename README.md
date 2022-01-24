@@ -35,6 +35,7 @@ Students of this lab require at least basic experience and skills with:
 1. Clone the git repo at https://github.com/devops-ontap/cisco-fso-labs
    - In your home directory on the Lab Computer use the command below from a shell
     ```
+    cd ~/.
     git clone git@github.com:devops-ontap/cisco-fso-labs.git
     ```
 
@@ -60,7 +61,6 @@ Students of this lab require at least basic experience and skills with:
    Everyone in your Team has access to the same pipelines. Access to pipe-lines is by Team.
    - Download the fly too from http://ci.devops-ontap.com:8080
    **Commands to enter after fly file has been downloaded (Mac instructions only)**
-
     ```
     sudo mkdir -p /usr/local/bin
     sudo mv ~/Downloads/fly /usr/local/bin
@@ -70,11 +70,13 @@ Students of this lab require at least basic experience and skills with:
 5. From within your git repo directory - update your lab_vars.py file with the name you want to use for your lab. For simplicity, keep the the name the same as your branch name (**instructor** in example below).  Also comment/uncomment so the desired regions is set (default shows "us-east-1")
 
     **Example lab_vars.py file:** 
-
     ```
-    name = "instructor"
-    region = "us-east-1"
-    az = "us-east-1a"
+    name = "instructor"  # name of VPC created
+    region = "us-east-1"  # uncomment your assigned region
+    # region = "us-east-2"
+    # region = "us-west-1"
+    # region = "us-west-2"
+    az = "us-east-1a"  # uncomment your assigned az
     #az = "us-east-2a"
     #az = "us-west-1a"
     #az = "us-west-2a"
@@ -94,20 +96,24 @@ Students of this lab require at least basic experience and skills with:
 
 6. Create a params directory OUTSIDE of the git repo, and copy out the sample-params.yml file into that directory.
   
-    ```mkdir params```
+    ```
+    cd ~/.
+    mkdir params
+    copy 
+    ```
   
 7. Update the master pipeline file parameters file with your branch name, private key, the github username and email address ( are only required when the lab repo is private)
     **Example params file:**
     ```
-    lpass-username: your_last_pass_email_here
-    lpass-password: your_last_pass_password_here
-    git-branch: your_branch_name_here 
+    lpass-username: # your_last_pass_email_here
+    lpass-password: # your_last_pass_password_here
+    git-branch: # your_branch_name_here same as AWS VPC instance
     git-uri: git@github.com:devops-ontap/cisco-fso-labs.git
     Username: your_github_username_here (if private)
     email: your_associated_github_email_here (if private)
-    image-repo-name: sconrod
-    registry-username:
-    registry-password:
+    image-repo-name: sconrod # DockerHub repo
+    registry-username: # Use only if DockerHub is private
+    registry-password: # Use only if DockerHub is private
     private_key: |
     -----BEGIN OPENSSH PRIVATE KEY----- (remove this line before pasting, leave the | above with a carriage return)
     your private ssh key here(this can be a lab computer where students work)
