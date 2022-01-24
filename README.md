@@ -183,9 +183,8 @@ To ensure stability of our infrastructure, it is required to manage it via code 
 
 As soon as a git push is complete, the lab prep job in the pipeline automatically starts
 
-
+## CSR1000 Issue
 openssl rsa -outform der -in private.pem -out private.key
-
 
 Common Error when trying to SSH to the CSR1000v:
 Unable to negotiate with 18.220.247.107 port 22: no matching key exchange method found. Their offer: diffie-hellman-group-exchange-sha1,diffie-hellman-group14-sha1
