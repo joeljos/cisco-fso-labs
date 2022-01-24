@@ -48,7 +48,7 @@ Students of this lab require at least basic experience and skills with:
     ```
 
 3. Setup your IAM account with Admin/FullEC2 and ability to generate VPCs and add the key in lastpass vault secure note
- In this lab - using lastpass as it is free and fast/simple to set up an account. Add the key to lastpass in a note in the AWS csv format
+ In this lab - using lastpass as it is free and fast/simple to set up an account. Add the key to lastpass as a secure note in the AWS csv format
    - Create a secure note named: **aws_cred**
    - The contents of the secure note: (Use formatting below exactly, use your AWS key and secret)
     ```
