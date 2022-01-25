@@ -50,7 +50,7 @@ Students of this lab require at least basic experience and skills with:
 3. Setup your IAM account with Admin/FullEC2 and ability to generate VPCs and add the key in lastpass vault secure note
  In this lab - using lastpass as it is free and fast/simple to set up an account. Add the key to lastpass as a secure note in the AWS csv format
    - Create a folder called **aws**
-   - Create a secure note named: **aws_cred**
+   - In the folder create a secure note named: **aws_cred**
    - The contents of the secure note: (Use formatting below exactly, use your AWS key and secret)
     ```
     User Name,Access key ID,Secret access key
@@ -131,7 +131,7 @@ Students of this lab require at least basic experience and skills with:
    - Login to Concourse in a browser at: http://ci.devops-ontap.com:8080
    - Enter the following command on your the lab desktops shell
     ```
-    fly --target=ci login --concourse-url=http://ci.devops-ontap.com:8080 --username=your_username_here -n nterone\n
+    fly --target=ci login --concourse-url=http://ci.devops-ontap.com:8080 --username=your_username_here -n nterone
     ```
   Then paste the URL into a browser and login if requested (it may transfer the token automatically)
 
