@@ -43,7 +43,7 @@ with open(outfile_csr_pub_ip) as access_json:
     print(csr_pub_ip)
 
 from netmiko import ConnectHandler
-key_file=name
+key_file='csr_key'
 ip = "192.168.1.1 255.255.255.0"
 
 #connection = netmiko.ConnectHandler(ip="54.225.2.16", device_type="cisco_ios", username="ec2-user", key_file="kp.pem")
@@ -52,7 +52,7 @@ csr = {
     "device_type": "cisco_ios",
     "ip": csr_pub_ip,
     "username": "ec2-user",
-    "key_file": name,
+    "key_file": csr_key,
 }
 
 net_connect = ConnectHandler(**csr)
