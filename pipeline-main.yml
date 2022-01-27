@@ -172,7 +172,6 @@ jobs:
               export AWS_PAGER=""
               chmod a+x csr_deploy.sh
               ./csr_deploy.sh
-          path: /bin/sh
       task: build-csr1000v
 
 - name: deploy-ubuntu-lan
@@ -229,7 +228,6 @@ jobs:
               export AWS_PAGER=""
               chmod a+x aws_ubuntu_lan_deploy.sh
               ./aws_ubuntu_lan_deploy.sh
-          path: /bin/sh
       task: build-ubuntu-router
 
 - name: deploy-ubuntu-router
@@ -286,7 +284,6 @@ jobs:
               export AWS_PAGER=""
               chmod a+x aws_ubuntu_router_deploy.sh
               ./aws_ubuntu_router_deploy.sh
-          path: /bin/sh
       task: build-ubuntu-router
 
 - name: configure-cisco-csr1000v
