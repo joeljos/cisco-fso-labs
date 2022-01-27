@@ -8,7 +8,7 @@ lab_vars='lab_vars.py'
 import lab_vars
 from lab_vars import *
 
-keypair_name='csr_key'
+keypair_name=name
 sg_name=name
 ami_id='ami-0d43ca842a14ff342'
 
