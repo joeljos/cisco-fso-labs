@@ -228,7 +228,7 @@ jobs:
               export AWS_PAGER=""
               chmod a+x aws_ubuntu_lan_deploy.sh
               ./aws_ubuntu_lan_deploy.sh
-      task: build-ubuntu-router
+      task: build-ubuntu-lan
 
 - name: deploy-ubuntu-router
   plan:
@@ -285,65 +285,6 @@ jobs:
               chmod a+x aws_ubuntu_router_deploy.sh
               ./aws_ubuntu_router_deploy.sh
       task: build-ubuntu-router
-
-- name: configure-cisco-csr1000v
-  plan:
-    - get: lpass-res
-      version: every
-    - config:
-        image_resource:
-          name: ""
-          source:
-            repository: alpine
-          type: docker-image
-        inputs:
-          - name: lpass-res
-        outputs:
-          - name: lpass-out
-        platform: linux
-        run:
-          args:
-            - -cx
-            - |
-              cp "lpass-res/item" "lpass-out/item.json"
-          path: /bin/sh
-      task: print-item
-
-    - get: git-resource
-    - config:
-        image_resource:
-          name: ""
-          source:
-            repository: sconrod/python-aws
-            tag: v2
-          type: docker-image
-        inputs:
-          - name: git-resource
-          - name: lpass-out
-        params:
-          NAME: ((registry-username))
-          PASSWORD: ((registry-password))
-        platform: linux
-        run:
-          args:
-            - -cx
-            - |
-              mkdir ~/.aws
-              cp "lpass-out/item.json" "git-resource/item.json"
-              cd git-resource
-              chmod a+x convert.sh
-              ./convert.sh
-              export AWS_PAGER=""
-              aws configure import --csv file://item.cln.csv
-              aws sts get-caller-identity --query Account --output text
-              chmod a+x configure_csr.sh
-              ./configure_csr.sh
-          path: /bin/sh
-      task: configure-csr
-  public: true
-
-
-
 
 resource_types:
   - name: lpass-type
