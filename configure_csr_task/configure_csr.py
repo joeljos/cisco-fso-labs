@@ -4,59 +4,32 @@ from subprocess import call, check_output
 import netmiko
 from netmiko import *
 
-lab_vars='lab_vars.py'
-import lab_vars
-from lab_vars import *
-outfile_vars='vars.py'
-
-#Get the csr10000v instance-id
-#aws ec2 describe-instances --region us-east-2 --filters "Name=availability-zone,Value=us-east-2a" "Name=tag:name,Value=csr1000v
-outfile_csr_inst='csr_id.json'
-cmd_get_csr1000v_inst_id='aws ec2 describe-instances --region' + " " + "{}".format(region) + " " + '--filters' + " " + '"Name=availability-zone,Value=' + "{}".format(az) + '"'
-output = check_output("{}".format(cmd_get_csr_pub_ip), shell=True).decode().strip()
-print("Output: \n{}\n".format(output)
-
-#Get the instance ID
-with open (outfile_csr_inst) as access_json:
-    read_content = json.load(access_json)
-    question_access = read_content['Instances']
-    replies_access = question_access[0]
-    replies_data=replies_access['InstanceId']
-    print(replies_data)
-    csr1000v_instance_id=replies_data
-
-#Get the external public address assigned to the csr1000v and write it to the var file or vault
-outfile_csr_pub_ip='csr_pub_ip.json'
-cmd_get_csr_pub_ip='aws ec2 describe-instances --instance-id' + " " + "{}".format(csr1000v_instance_id) + " " + '--query "Reservations[*].Instances[*].PublicIpAddress"'
-output = check_output("{}".format(cmd_get_csr_pub_ip), shell=True).decode().strip()
-print("Output: \n{}\n".format(output))
-with open(outfile_csr_pub_ip, 'w') as my_file:
-    my_file.write(output)
-
-outfile_csr_pub_ip='csr_pub_ip.json'
-with open(outfile_csr_pub_ip) as access_json:
-    read_content = json.load(access_json)
-    question_access = read_content[0]
-    print(read_content)
-    question_data=question_access[0]
-    csr_pub_ip=question_data
-    print(csr_pub_ip)
 
 from netmiko import ConnectHandler
-key_file='csr_key'
-ip = "192.168.1.1 255.255.255.0"
 
-#connection = netmiko.ConnectHandler(ip="54.225.2.16", device_type="cisco_ios", username="ec2-user", key_file="kp.pem")
 
-csr = {
-    "device_type": "cisco_ios",
-    "ip": csr_pub_ip,
-    "username": "ec2-user",
-    "key_file": csr_key,
-}
+key_file='sconrod.pem'
+username='ubuntu'
+ip='ip address'
 
-net_connect = ConnectHandler(**csr)
-net_connect.enable()
+net_connect = netmiko.ConnectHandler(ip=ip, device_type="cisco_ios", username="ec2-user", key_file=key_file)
+
+print(net_connect.send_command("get-config"))
+
+output = net_connect.send_command("end")
+print(output)
+
+output= net_connect.send_config_set("exec-timeout 0 0")
+print(output)
+
+output = net_connect.send_command("end")
+print(output)
+
+output= net_connect.send_config_set("no ip domain-lookup")
+print(output)
+
+output = net_connect.send_command("end")
+print(output)
 
 output = net_connect.send_config_set("host csr1000v")
 print(output)
