@@ -10,11 +10,11 @@ from netmiko import ConnectHandler
 
 key_file='sconrod.pem'
 username='ec2-user'
-ip='ip address'
+ip='18.217.126.222'
 
 net_connect = netmiko.ConnectHandler(ip=ip, device_type="cisco_ios", username="ec2-user", key_file=key_file)
 
-print(net_connect.send_command("sh ip int brief "))
+print(net_connect.send_command("sh ip int brief"))
 
 output = net_connect.send_command("end")
 print(output)
