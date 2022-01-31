@@ -225,3 +225,9 @@ output = check_output("{}".format(cmd_attach_csr_nic), shell=True).decode().stri
 print("Output: \n{}\n".format(output))
 with open(outfile_attach_csr_nic, 'w') as my_file:
     my_file.write(output)
+
+#Wait to check the instance is initialized
+#Check that the instance is initialized
+cmd_check_instance='aws ec2 wait instance-status-ok --instance-ids' + " " + csr1000v_instance_id + " " + '--region' + " " + "{}".format(region)
+output = check_output("{}".format(cmd_check_instance), shell=True).decode().strip()
+print("Output: \n{}\n".format(output))

@@ -1,6 +1,5 @@
-Cisco Cloud Services Router (CSR) 1000V - BYOL for SD-WAN
+Cisco Cloud Services Router (CSR) 1000V - BYOL for SD-WAN 17.3
 Virginia:
 Ami Id: ami-07567b572a8b16045
-
 OHIO
 Ami Id: ami-00811671609253811
